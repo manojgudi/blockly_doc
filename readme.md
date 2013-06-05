@@ -89,8 +89,7 @@ If there are no warnings or error, then compilation is done successfully.
 The [official documentation](http://code.google.com/p/blockly/wiki/DefiningBlocks) provides good overview.<br/>
 Here's diff for out my_hpf filter block. Create a new filter.js in specified folder.<br/>
 
-```
-diff --git a/language/common/filters.js b/language/common/filters.js
+```diff --git a/language/common/filters.js b/language/common/filters.js
 new file mode 100644
 index 0000000..50f0e6c
 --- /dev/null
@@ -106,8 +105,7 @@ index 0000000..50f0e6c
 +    this.setOutput(true, "null");
 +    this.setTooltip('');
 +  }
-+};
-``` <br/>
++};``` <br/>
 
 ####Scripting for block -> Python parsing
 Go through these links before commencing<br/>
@@ -116,8 +114,7 @@ Go through these links before commencing<br/>
 
 Create a new filter.js file in directory specified. Code is pretty much self-explanatory<br/>
 
-```
-diff --git a/generators/python/filters.js b/generators/python/filters.js
+```diff --git a/generators/python/filters.js b/generators/python/filters.js
 new file mode 100644
 index 0000000..d036856
 --- /dev/null
@@ -143,8 +140,7 @@ index 0000000..d036856
 +       var order = code < 0 ? Blockly.Python.ORDER_UNARY_SIGN: Blockly.Python.ORDER_NONE;
 +       return[code, order];
 +
-+};
-```
++};```
 
 ####Including scripts in en.html
 And finally include both these scripts in en.html
@@ -170,7 +166,7 @@ Building js files is necessary to merge and compress filters.js scripts with oth
 **CAVEAT**<br/>
 build.py is network dependent, it is imperative that you use this [build.py](https://github.com/manojgudi/blockly/blob/proxy_network/build.py) with proper proxy IP and port settings to build successfully<br/>
 Change the following line:<br/>
-```proxy_support = urllib2.ProxyHandler({"http":"http://10.101.11.108:3128"})``````
+```proxy_support = urllib2.ProxyHandler({"http":"http://10.101.11.108:3128"})```
 
 The common error encountered with build failure is *JSONDecodeError: No JSON object could be decoded*; which means incorrect network settings.
 
