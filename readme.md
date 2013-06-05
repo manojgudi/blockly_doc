@@ -171,8 +171,9 @@ Building js files is necessary to merge and compress filters.js scripts with oth
 **CAVEAT**<br/>
 build.py is network dependent, it is imperative that you use this [build.py](https://github.com/manojgudi/blockly/blob/proxy_network/build.py) with proper proxy IP and port settings to build successfully<br/>
 Change the following line:<br/>
-``` proxy_support = urllib2.ProxyHandler({"http":"http://10.101.11.108:3128"})
-``` <br/>
+`proxy_support = urllib2.ProxyHandler({"http":"http://10.101.11.108:3128"})
+`
+
 The common error encountered with build failure is *JSONDecodeError: No JSON object could be decoded*; which means incorrect network settings.
 
 Once built, the *apps/code/en.html* should display your block in your category, and blocks should be parsed in to python code as a result.
