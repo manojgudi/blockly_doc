@@ -107,7 +107,7 @@ index 0000000..50f0e6c
 +    this.setTooltip('');
 +  }
 +};
-```<br/>
+``` <br/>
 
 ####Scripting for block -> Python parsing
 Go through these links before commencing<br/>
@@ -171,8 +171,7 @@ Building js files is necessary to merge and compress filters.js scripts with oth
 **CAVEAT**<br/>
 build.py is network dependent, it is imperative that you use this [build.py](https://github.com/manojgudi/blockly/blob/proxy_network/build.py) with proper proxy IP and port settings to build successfully<br/>
 Change the following line:<br/>
-`proxy_support = urllib2.ProxyHandler({"http":"http://10.101.11.108:3128"})
-`
+`proxy_support = urllib2.ProxyHandler({"http":"http://10.101.11.108:3128"})`
 
 The common error encountered with build failure is *JSONDecodeError: No JSON object could be decoded*; which means incorrect network settings.
 
