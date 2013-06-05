@@ -79,5 +79,91 @@ index ef1ec64..a556c5a 100644
        <block type="colour_random"></block>
 ```
 
+Then compile this template.soy script using SoyToJsSrcCompiler<br/>
+(assuming your working directory is *~/blockly/static/*)<br/>
+```java -jar apps/code/soy_comp/SoyToJsSrcCompiler.jar --outputPathFormat apps/code/template.js --srcs apps/code/template.soy```
+
+If there are no warnings or error, then compilation is done successfully.
+
+####Defining block properties
+The [official documentation](http://code.google.com/p/blockly/wiki/DefiningBlocks) provides good overview.<br/>
+Here's diff for out my_hpf filter block. Create a new filter.js in specified folder.<br/>
+
+```
+diff --git a/language/common/filters.js b/language/common/filters.js
+new file mode 100644
+index 0000000..50f0e6c
+--- /dev/null
++++ b/language/common/filters.js
+@@ -0,0 +1,11 @@
++Blockly.Language.filters_hpf = {
++  helpUrl: 'http://www.example.com/',
++  init: function() {
++    this.setColour(290);
++    this.appendValueInput("NUM")
++        //.setCheck("null")
++        .appendTitle("My HPF");
++    this.setOutput(true, "null");
++    this.setTooltip('');
++  }
++};
+```<br/>
+
+####Scripting for block -> Python parsing
+Go through these links before commencing<br/>
+[Generating Code](http://code.google.com/p/blockly/wiki/GeneratingCode)<br/>
+[Operator Precedence](http://code.google.com/p/blockly/wiki/OperatorPrecedence)
+
+Create a new filter.js file in directory specified. Code is pretty much self-explanatory<br/>
+```
+diff --git a/generators/python/filters.js b/generators/python/filters.js
+new file mode 100644
+index 0000000..d036856
+--- /dev/null
++++ b/generators/python/filters.js
+@@ -0,0 +1,22 @@
++// Python Filters.js
++'use strict';
++
++Blockly.Python = Blockly.Generator.get('Python');
++
++Blockly.Python.filters = {};
++
++Blockly.Python.addReservedWords('hpf');
++
++Blockly.Python.filters_hpf = function() {
++
++       
++       var argument0 = Blockly.Python.valueToCode(this, 'NUM', Blockly.Python.ORDER_ATOMIC) || '0';
++/*     if (isNaN(argument0)){
++               argument0 = 0;
++       }
++*/     var code = 'my_hpf(' + argument0 + ')' ;
++       var order = code < 0 ? Blockly.Python.ORDER_UNARY_SIGN: Blockly.Python.ORDER_NONE;
++       return[code, order];
++
++};
++
+```
+
+####Including scripts in en.html
+And finally include both these scripts in en.html
+
+```diff --git a/apps/code/en.html b/apps/code/en.html
+index 2fde103..e62e710 100644
+--- a/apps/code/en.html
++++ b/apps/code/en.html
+@@ -6,6 +6,12 @@
+   <script type="text/javascript" src="/storage.js"></script>
+   <script type="text/javascript" src="../_soy/soyutils.js"></script>
+   <script type="text/javascript" src="template.js"></script>
++
++  <!-- My Scripts -->
++  <script type="text/javascript" src="../../language/common/filters.js"></script>
++ <script type="text/javascript" src="../../generators/python/filters.js"></script>
+```
+
+
+
 
 One might alternatively refer [original documentation](http://code.google.com/p/blockly/wiki/CustomBlocks) of blockly.
