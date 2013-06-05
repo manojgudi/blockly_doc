@@ -1,64 +1,50 @@
-*LABVIEW*
+gnu_lc
+---
+Forked from blockly http://code.google.com/p/blockly/
 
-Programming
-----------------------
+###Blockly Overview
 
+Blockly is just a translational program; i.e. it converts visual programming blocks in to equivalent javascript/python using javascript parser. Since blockly has multiple js files, it builds all the js files into smaller and dense *compressed.js files which are then used by blockly applications.
+Closure is a dependency required by blockly to build those javascript files.
+<br/>
+###Getting started
+First, clone two repositories<br/>
+Blockly source code:<br/>
+`git clone https://github.com/manojgudi/blockly`
 
-###Structure
-for, while, case, flat sequence(to avoid parallelization), shift register, feedback, formula node
+And Closure Library:<br/>
+`git clone https://github.com/manojgudi/closure-library-read-only.git`
 
-Array <=> Matrix
-Build Array()
+Blockly source code has *build.py* builder script but it wont execute unless the folder structure conforms to [Blockly Folder Structure](http://code.google.com/p/blockly/wiki/Closure)<br/>
 
-Array Size(returns size of array), Build Array(input element and returns array)
-_Array to matrix(); Matrix to array()_ 
-
-###Numeric
-
-add, subtract, multiply, divide, quotient & remainder, de/increment, compound block(add,multiply, AND, OR, XOR), absolute value, ceil/floor, x^y block, Numeric
-constant, _ennum constant_, random number, Mathematical constants(pi, tau, epsilon)
-
-###Boolean
-and, or, xor, not, true/false-constant
-
-###Strings
-
-###Comparision
-eq, neq, >, <, >/<=, select switch, max/mean, In range(True/False) and coerce(1->8 mapped to 1->5)
-
-###Delay
-time delay, _loop delay_
-
-###File I/O
-csv write/read
-
-Mathematics
-----
-
-###Linear algebra
-solve linear equations, products(dot/cross/kronecker), Transpose, Exponental(matrix powers), eigen values
-
-###Signal Generations
-Generation of (saw tooth, sine...)
-
-###Data type conversion
-uint8, uint16, uint32
-
-Control Design and simulation
-----
-###PID blocks
-
-###Control & Simulation
-Integrator, Differentiator, Transfer Function(IP-->OP)
+We'll have to build javascript files later when creating custom blocks. Also we'll be specifically concentrating on language generation application provided by blockly -> *apps/code/en.html* 
 
 
-Front Panel
-----
+###Creating Custom blocks
 
-###Indicator
-Numeric, Matrix, LED, Graph, Plotting
+To create custom blocks its imperative that developer should be clear about functionality which he expects from it. Creating a custom block also usually means that a new category is required for toolbox. 
 
-###Express buttons
-push button, toggle switch
+Let's take an example of building a simple custom block *my_hpf()* function with one input and output. There are _ steps:<br/>
+
+1. Editing en.html to introduce new category
+
+In our case we introduce a new category called **Filters**
+
+```
+diff --git a/apps/code/en.html b/apps/code/en.html
+index 2fde103..e62e710 100644
+--- a/apps/code/en.html
++++ b/apps/code/en.html
+@@ -6,6 +6,12 @@
+   <script>
+     var MSG = {
+       // Tooltips.
+@@ -21,6 +27,7 @@
+       catColour: 'Colour',
+       catVariables: 'Variables',
+       catProcedures: 'Procedures',
++      catFilters: 'Filters',
+```
 
 
+One might alternatively refer [original documentation](http://code.google.com/p/blockly/wiki/CustomBlocks) of blockly.
