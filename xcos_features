@@ -1,0 +1,18 @@
+Features not available in Xcos required to make it comparable to LabVIEW
+
+###Structure
+for, flat sequence(to avoid parallelization)
+
+###Math operation 
+quotient & remainder, 
+ _ennum constant_,  
+
+###Boolean
+true/false-constant
+
+###Comparison
+equal to, not equal to, >, <, >/<=, select switch, In range(True/False) and coerce(1->8 mapped to 1->5)
+
+###Indicator
+  LED
+
